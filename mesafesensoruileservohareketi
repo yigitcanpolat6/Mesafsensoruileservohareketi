@@ -1,0 +1,52 @@
+#include <Servo.h>
+int echo=13;
+int trig=12;
+int led=8;//YEŞİL
+int led1=7;//KIRMIZI
+Servo myservo;
+int distance;
+int duration;
+int leddur=0;
+int buz=11;
+void setup() {
+pinMode(trig,OUTPUT);
+pinMode(echo,INPUT);
+pinMode(led,OUTPUT);
+pinMode(led1,OUTPUT);
+pinMode(buz,OUTPUT);
+myservo.attach(9);
+}
+
+void loop() {
+  digitalWrite(trig, LOW); 
+  delayMicroseconds(2);
+  digitalWrite(trig, HIGH); 
+  delayMicroseconds(10);
+  digitalWrite(trig, LOW);
+  duration = pulseIn(echo, HIGH); 
+  distance= duration*0.0345/2;
+      digitalWrite(led1,HIGH);
+      digitalWrite(led,LOW);
+if(distance < 5){
+    myservo.write(30);
+      digitalWrite(led,HIGH);
+      leddur=1;
+      if(leddur=1){
+        delay(1500);
+        digitalWrite(buz,HIGH);
+
+      }
+      
+    
+  }
+  else{
+    myservo.write(120);
+    digitalWrite(led,LOW);
+    digitalWrite(buz,LOW);
+    leddur=0;
+    
+  }
+  delay(11);
+}
+  
+  
